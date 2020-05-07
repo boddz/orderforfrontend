@@ -23,14 +23,12 @@ public class CustomerController {
         this.customerService = customerService;
         this.customerMapper = customerMapper;
     }
-    @CrossOrigin()
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public CustomerDto createCustomer(@RequestBody CustomerDto customerDto) {
         return customerMapper.toDto(
                 customerService.createCustomer(
                         customerMapper.toDomain(customerDto)));
     }
-    @CrossOrigin()
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<CustomerDto> getAllCustomers() {
         return customerService.getAllCustomers().stream()
@@ -44,7 +42,6 @@ public class CustomerController {
 //                customerService.getCustomer(UUID.fromString(id)));
 //    }
 
-    @CrossOrigin()
     @GetMapping(path="/{firstname}", produces = MediaType.APPLICATION_JSON_VALUE)
     public CustomerDto getCustomerByName(@PathVariable String firstname) {
         return customerService.getAllCustomers().stream()

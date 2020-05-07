@@ -28,14 +28,12 @@ public class OrderController {
         this.orderMapper = orderMapper;
     }
 
-    @CrossOrigin()
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<OrderDto> getAllOrders(@RequestParam(name = "shippableToday", required = false) boolean onlyIncludeShippableToday) {
         return orderService.getAllOrders(onlyIncludeShippableToday).stream()
                 .map(order -> orderMapper.toDto(order))
                 .collect(Collectors.toList());
     }
-    @CrossOrigin()
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public OrderAfterCreationDto createOrder(@RequestBody OrderCreationDto orderDto) {
         return orderMapper.toOrderAfterCreationDto(
@@ -43,13 +41,11 @@ public class OrderController {
                         orderMapper.toDomain(orderDto)));
     }
 
-    @CrossOrigin()
     @PostMapping(path = "/{id}/reorder", produces = MediaType.APPLICATION_JSON_VALUE)
     public OrderAfterCreationDto reorderOrder(@PathVariable String id) {
         return orderMapper.toOrderAfterCreationDto(
                 orderService.reorderOrder(UUID.fromString(id)));
     }
-    @CrossOrigin()
     @GetMapping(path = "/customers/{customerId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public OrdersReportDto getOrdersForCustomerReport(@PathVariable String customerId) {
         return orderMapper.toOrdersReportDto(

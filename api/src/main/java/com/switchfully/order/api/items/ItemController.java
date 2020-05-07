@@ -28,7 +28,6 @@ public class ItemController {
         this.itemService = itemService;
         this.itemMapper = itemMapper;
     }
-    @CrossOrigin()
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ItemDto createItem(@RequestBody ItemDto itemDto) {
         return itemMapper.toDto(
@@ -43,7 +42,6 @@ public class ItemController {
 //                        itemMapper.toDomain(UUID.fromString(id), itemDto)));
 //    }
 
-    @CrossOrigin()
     @PutMapping(path = "/{name}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ItemDto updateItem(@PathVariable String name, @RequestBody ItemDto itemDto) {
         return itemMapper.toDto(
@@ -51,7 +49,6 @@ public class ItemController {
                         itemMapper.toDomain(name, itemDto)));
     }
 
-    @CrossOrigin()
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ItemDto> getAllItems(@RequestParam(name = "stockUrgency", required = false) String stockUrgency) {
         List<ItemDto> allItems = itemService.getAllItems().stream()
@@ -61,7 +58,6 @@ public class ItemController {
         return filterOnStockUrgency(stockUrgency, allItems);
     }
 
-    @CrossOrigin()
     @GetMapping(path = "/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ItemDto getItemByName(@PathVariable String name) {
         return itemService.getAllItems().stream()
