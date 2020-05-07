@@ -1,6 +1,6 @@
 # Switchfully :cat:
 
-www.switchfully.com
+www.switchfully.com :cat:
 
 ## Örder technical implementation
 
