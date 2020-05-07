@@ -1,4 +1,4 @@
-# Switchfully
+# Switchfully :cat:
 
 www.switchfully.com
 
