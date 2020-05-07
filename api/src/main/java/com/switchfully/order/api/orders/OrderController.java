@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
-@CrossOrigin()
+@CrossOrigin
 @RestController
 @RequestMapping(path = "/" + OrderController.RESOURCE_NAME)
 public class OrderController {

@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
-@CrossOrigin()
+@CrossOrigin
 @RestController
 @RequestMapping(path = "/" + CustomerController.RESOURCE_NAME)
 public class CustomerController {
