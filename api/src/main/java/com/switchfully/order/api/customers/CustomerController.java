@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
+@CrossOrigin()
 @RestController
 @RequestMapping(path = "/" + CustomerController.RESOURCE_NAME)
 public class CustomerController {
@@ -23,28 +23,28 @@ public class CustomerController {
         this.customerService = customerService;
         this.customerMapper = customerMapper;
     }
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin()
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public CustomerDto createCustomer(@RequestBody CustomerDto customerDto) {
         return customerMapper.toDto(
                 customerService.createCustomer(
                         customerMapper.toDomain(customerDto)));
     }
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin()
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<CustomerDto> getAllCustomers() {
         return customerService.getAllCustomers().stream()
                 .map(customerMapper::toDto)
                 .collect(Collectors.toList());
     }
-//    @CrossOrigin(origins = "http://localhost:4200")
+//    @CrossOrigin()
 //    @GetMapping(path="/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 //    public CustomerDto getCustomer(@PathVariable String id) {
 //        return customerMapper.toDto(
 //                customerService.getCustomer(UUID.fromString(id)));
 //    }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin()
     @GetMapping(path="/{firstname}", produces = MediaType.APPLICATION_JSON_VALUE)
     public CustomerDto getCustomerByName(@PathVariable String firstname) {
         return customerService.getAllCustomers().stream()

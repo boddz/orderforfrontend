@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
+@CrossOrigin()
 @RestController
 @RequestMapping(path = "/" + OrderController.RESOURCE_NAME)
 public class OrderController {
@@ -28,14 +28,14 @@ public class OrderController {
         this.orderMapper = orderMapper;
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin()
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<OrderDto> getAllOrders(@RequestParam(name = "shippableToday", required = false) boolean onlyIncludeShippableToday) {
         return orderService.getAllOrders(onlyIncludeShippableToday).stream()
                 .map(order -> orderMapper.toDto(order))
                 .collect(Collectors.toList());
     }
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin()
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public OrderAfterCreationDto createOrder(@RequestBody OrderCreationDto orderDto) {
         return orderMapper.toOrderAfterCreationDto(
@@ -43,13 +43,13 @@ public class OrderController {
                         orderMapper.toDomain(orderDto)));
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin()
     @PostMapping(path = "/{id}/reorder", produces = MediaType.APPLICATION_JSON_VALUE)
     public OrderAfterCreationDto reorderOrder(@PathVariable String id) {
         return orderMapper.toOrderAfterCreationDto(
                 orderService.reorderOrder(UUID.fromString(id)));
     }
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin()
     @GetMapping(path = "/customers/{customerId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public OrdersReportDto getOrdersForCustomerReport(@PathVariable String customerId) {
         return orderMapper.toOrdersReportDto(
